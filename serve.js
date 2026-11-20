@@ -20,6 +20,10 @@ const MIME_TYPES = {
   '.ico': 'image/x-icon'
 };
 
+process.on('uncaughtException', (err) => {
+  console.error('Server error handled:', err.message);
+});
+
 const server = http.createServer((req, res) => {
   let reqUrl = req.url.split('?')[0];
 
@@ -62,7 +66,15 @@ const server = http.createServer((req, res) => {
     'Access-Control-Allow-Origin': '*',
     'Cache-Control': 'no-cache'
   });
-  fs.createReadStream(filePath).pipe(res);
+  const stream = fs.createReadStream(filePath);
+  stream.on('error', (err) => {
+    console.error('File stream error:', err.message);
+    if (!res.headersSent) {
+      res.writeHead(500, { 'Content-Type': 'text/plain' });
+      res.end('500 Server Error');
+    }
+  });
+  stream.pipe(res);
 });
 
 server.listen(PORT, () => {
