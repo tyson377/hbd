@@ -1,0 +1,27 @@
+# Dependencies
+node_modules/
+
+# OS / System
+.DS_Store
+Thumbs.db
+desktop.ini
+.vscode/
+.idea/
+
+# Backups & development artifacts
+*.bak*
+*backup*
+*before*
+*pre*
+second_birthday_*
+inspect_*.js
+capture_*.js
+get_text_info.js
+read_png_meta.js
+make_sister_stickers.js
+
+# Root debug screenshots & text files
+/*.png
+/*.txt
+
+.vercel

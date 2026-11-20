@@ -1,0 +1,998 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Happy 19th Birthday, Divya!</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,400;1,600&family=Montserrat:wght@400;500;600;700&family=Caveat:wght@500;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --burgundy-deep: #25050e;
+    --burgundy: #4a0e1b;
+    --burgundy-card: #5a1222;
+    --burgundy-accent: #7a1b30;
+    --blush-cream: #fff5f7;
+    --blush-pink: #fce4ec;
+    --blush-border: #f8bbd0;
+    --champagne: #f7e7ce;
+    --champagne-gold: #d4af37;
+    --champagne-glow: rgba(212, 175, 55, 0.45);
+    --gold-foil: linear-gradient(135deg, #f9f0d9 0%, #d4af37 50%, #aa8214 100%);
+  }
+
+  * { margin:0; padding:0; box-sizing:border-box; }
+  html, body {
+    width: 100%;
+    height: 100%;
+    height: 100dvh;
+    overflow: hidden;
+    background: var(--burgundy-deep);
+    color: #fff;
+    font-family: 'Montserrat', sans-serif;
+    user-select: none;
+    -webkit-user-select: none;
+  }
+
+  /* ---------------- Edge-to-Edge Full-Screen Hero Background: Divya (Photo 10) ---------------- */
+  .bg-hero-stage {
+    position: fixed;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    overflow: hidden;
+    pointer-events: none;
+    background-color: #1a040d;
+  }
+
+  .bg-hero-photo {
+    position: fixed;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: 58% 55%;
+    display: block;
+    /* Clean, bright, and radiant photo clarity without blur */
+    filter: brightness(0.97) contrast(1.02);
+    transition: transform 3.5s cubic-bezier(0.25, 1, 0.5, 1), filter 2s ease;
+    will-change: transform;
+  }
+
+  /* Subtle, Sheer Burgundy Overlay: 0.15 wash in center to keep photo radiant; softly darkens corners */
+  .bg-cinematic-overlay {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    pointer-events: none;
+    background:
+      radial-gradient(ellipse 85% 75% at 50% 50%, transparent 45%, rgba(35, 10, 20, 0.40) 80%, rgba(20, 4, 10, 0.70) 100%),
+      rgba(100, 29, 53, 0.15);
+  }
+
+  /* Mobile Responsive Tuning: Adapts crop so Divya's face remains perfectly centered & visible */
+  @media (max-width: 768px) {
+    .bg-hero-photo {
+      object-position: 58% 52%;
+    }
+    .bg-cinematic-overlay {
+      background:
+        radial-gradient(ellipse 90% 80% at 50% 48%, transparent 40%, rgba(35, 10, 20, 0.42) 80%, rgba(20, 4, 10, 0.72) 100%),
+        rgba(100, 29, 53, 0.15);
+    }
+  }
+
+  @media (max-width: 480px) {
+    .bg-hero-photo {
+      object-position: 59% 50%;
+    }
+  }
+
+  /* Shimmering champagne dust / petals */
+  .petals-layer {
+    position: fixed;
+    inset: 0;
+    z-index: 2;
+    pointer-events: none;
+    overflow: hidden;
+  }
+  .orchid-petal {
+    position: absolute;
+    width: 14px;
+    height: 18px;
+    background: radial-gradient(ellipse at 30% 30%, #fff0f3 0%, #f8bbd0 60%, rgba(122, 27, 48, 0.4) 100%);
+    border-radius: 60% 40% 70% 30% / 50% 60% 40% 50%;
+    opacity: 0;
+    pointer-events: none;
+    filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));
+  }
+
+  /* ---------------- Envelope Scene ---------------- */
+  .envelope-stage {
+    position: relative;
+    z-index: 10;
+    width: 100%;
+    height: 100%;
+    min-height: 100vh;
+    min-height: 100dvh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 16px;
+  }
+
+  .stage-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 16px;
+    border-radius: 999px;
+    background: rgba(255, 240, 243, 0.08);
+    border: 1px solid rgba(212, 175, 55, 0.35);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    color: var(--champagne);
+    font-size: 11px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    margin-bottom: 22px;
+    box-shadow: 0 4px 18px rgba(0,0,0,0.3);
+    animation: fadeInDown 1s ease-out;
+  }
+  .stage-badge .orchid-icon {
+    font-size: 13px;
+    filter: drop-shadow(0 0 6px rgba(248, 187, 208, 0.7));
+  }
+
+  
+  /* 3D Envelope Wrapper */
+  .envelope-wrapper {
+    position: relative;
+    width: min(440px, 92vw);
+    height: min(290px, 60vw);
+    perspective: 1200px;
+    margin: 0 auto;
+  }
+
+  .envelope-card {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    background: var(--burgundy-card);
+    border-radius: 14px;
+    box-shadow:
+      0 25px 60px rgba(0, 0, 0, 0.75),
+      0 0 0 1px rgba(212, 175, 55, 0.35),
+      inset 0 1px 0 rgba(255, 255, 255, 0.15);
+    overflow: visible;
+  }
+
+  /* Envelope Back Interior */
+  .envelope-interior {
+    position: absolute;
+    inset: 0;
+    border-radius: 14px;
+    background: linear-gradient(180deg, #320711 0%, #1c0309 100%);
+    overflow: hidden;
+    z-index: 1;
+  }
+  .envelope-interior::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    opacity: 0.12;
+    background-image: radial-gradient(#d4af37 1px, transparent 1px);
+    background-size: 14px 14px;
+  }
+
+  /* The Letter (Slides Up on Open) */
+  .letter {
+    position: absolute;
+    left: 4%;
+    right: 4%;
+    bottom: 4%;
+    top: 4%;
+    background: var(--blush-cream);
+    border-radius: 10px;
+    padding: 24px 22px;
+    color: #2b0811;
+    z-index: 2;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.35);
+    border: 1px solid var(--champagne-gold);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    transform: translateY(0);
+    transition: transform 1s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.8s ease;
+    will-change: transform;
+    overflow: hidden;
+  }
+
+  .letter::before {
+    content: '';
+    position: absolute;
+    inset: 4px;
+    border: 1px dashed rgba(212, 175, 55, 0.55);
+    border-radius: 6px;
+    pointer-events: none;
+  }
+
+  /* Letter floral corner watermarks */
+  .letter-corner-decor {
+    position: absolute;
+    width: 38px;
+    height: 38px;
+    opacity: 0.35;
+    pointer-events: none;
+  }
+  .letter-corner-decor.tl { top: 8px; left: 8px; }
+  .letter-corner-decor.tr { top: 8px; right: 8px; transform: scaleX(-1); }
+  .letter-corner-decor.bl { bottom: 8px; left: 8px; transform: scaleY(-1); }
+  .letter-corner-decor.br { bottom: 8px; right: 8px; transform: scale(-1); }
+
+  .letter-tag {
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+    color: #8c253b;
+    margin-bottom: 6px;
+  }
+
+  .letter-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(20px, 5.2vw, 27px);
+    font-weight: 700;
+    color: #4a0e1b;
+    line-height: 1.25;
+    margin-bottom: 10px;
+  }
+  .letter-title span.name {
+    color: #83182f;
+    font-style: italic;
+    background: linear-gradient(135deg, #78192d 0%, #a8203c 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .letter-body {
+    font-size: clamp(11.5px, 2.7vw, 13.5px);
+    line-height: 1.6;
+    color: #551622;
+    max-width: 92%;
+    margin-bottom: 14px;
+    font-weight: 500;
+  }
+
+  .letter-signature {
+    font-family: 'Caveat', cursive;
+    font-size: clamp(16px, 3.8vw, 20px);
+    color: #83182f;
+    margin-bottom: 12px;
+  }
+
+  /* Explore Section Button */
+  .explore-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: linear-gradient(135deg, #5a1222 0%, #7a1b30 100%);
+    color: #fff;
+    border: 1px solid var(--champagne-gold);
+    padding: 10px 22px;
+    border-radius: 999px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    cursor: pointer;
+    box-shadow: 0 4px 18px rgba(90, 18, 34, 0.4), 0 0 10px var(--champagne-glow);
+    transition: all 0.25s ease;
+    opacity: 0;
+    transform: translateY(10px);
+    pointer-events: none;
+  }
+  .explore-btn:hover {
+    background: linear-gradient(135deg, #7a1b30 0%, #94243c 100%);
+    transform: translateY(-2px) scale(1.03);
+    box-shadow: 0 8px 24px rgba(90, 18, 34, 0.5), 0 0 18px var(--champagne-glow);
+  }
+  .explore-btn:active {
+    transform: translateY(0) scale(0.98);
+  }
+  .explore-btn svg {
+    width: 14px;
+    height: 14px;
+    transition: transform 0.25s ease;
+  }
+  .explore-btn:hover svg {
+    transform: translateY(2px);
+  }
+
+  /* Envelope Front Folds (Lower Pocket) */
+  .envelope-pocket {
+    position: absolute;
+    inset: 0;
+    z-index: 3;
+    pointer-events: none;
+    border-radius: 14px;
+    overflow: hidden;
+  }
+  .envelope-pocket-svg {
+    width: 100%;
+    height: 100%;
+    display: block;
+  }
+
+  /* Front Envelope Calligraphy Addressing */
+  .envelope-front-label {
+    position: absolute;
+    bottom: 22px;
+    left: 0;
+    right: 0;
+    text-align: center;
+    z-index: 4;
+    pointer-events: none;
+    transition: opacity 0.5s ease;
+  }
+  .envelope-to {
+    font-family: 'Caveat', cursive;
+    font-size: clamp(22px, 5.2vw, 29px);
+    color: var(--champagne);
+    text-shadow: 0 2px 8px rgba(0,0,0,0.7);
+    letter-spacing: 0.04em;
+  }
+  .envelope-to span.orchid-tag {
+    font-size: 16px;
+    margin-left: 4px;
+  }
+
+  /* Top Folding Flap (3D Flip) */
+  .envelope-flap {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 52%;
+    transform-origin: top center;
+    z-index: 5;
+    transition: transform 0.85s cubic-bezier(0.4, 0, 0.2, 1);
+    transform-style: preserve-3d;
+    pointer-events: none;
+  }
+  .envelope-flap-svg {
+    width: 100%;
+    height: 100%;
+    filter: drop-shadow(0 4px 10px rgba(0,0,0,0.55));
+  }
+
+  /* Wax Seal / Interactive Open Button */
+  .wax-seal-btn {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 10;
+    width: 72px;
+    height: 72px;
+    border-radius: 50%;
+    border: none;
+    cursor: pointer;
+    background: radial-gradient(circle at 35% 35%, #fcedcb 0%, #d4af37 55%, #916e15 100%);
+    box-shadow:
+      0 6px 20px rgba(0, 0, 0, 0.55),
+      0 0 0 3px rgba(212, 175, 55, 0.35),
+      0 0 22px var(--champagne-glow);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.25s ease;
+    outline: none;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .wax-seal-btn:hover {
+    transform: translate(-50%, -50%) scale(1.08);
+    box-shadow:
+      0 8px 25px rgba(0, 0, 0, 0.65),
+      0 0 0 4px rgba(212, 175, 55, 0.55),
+      0 0 32px var(--champagne-glow);
+  }
+  .wax-seal-btn:active {
+    transform: translate(-50%, -50%) scale(0.95);
+  }
+  .wax-seal-btn:focus-visible {
+    box-shadow: 0 0 0 4px #fff, 0 0 25px var(--champagne-glow);
+  }
+
+  .seal-inner {
+    width: 58px;
+    height: 58px;
+    border-radius: 50%;
+    border: 1px dashed rgba(74, 14, 27, 0.4);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 2px;
+  }
+  .seal-orchid {
+    font-size: 20px;
+    line-height: 1;
+    filter: drop-shadow(0 1px 2px rgba(0,0,0,0.25));
+  }
+  .seal-text {
+    font-size: 8px;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: #4a0e1b;
+    line-height: 1;
+  }
+
+  /* Pulsing Seal Ring */
+  .seal-pulse {
+    position: absolute;
+    inset: -6px;
+    border-radius: 50%;
+    border: 2px solid var(--champagne-gold);
+    opacity: 0.6;
+    animation: pulseRing 2.2s infinite ease-out;
+    pointer-events: none;
+  }
+  @keyframes pulseRing {
+    0% { transform: scale(0.9); opacity: 0.8; }
+    50% { transform: scale(1.25); opacity: 0.2; }
+    100% { transform: scale(1.4); opacity: 0; }
+  }
+
+  /* Open State Classes */
+  .envelope-wrapper.is-open .envelope-flap {
+    transform: rotateX(180deg);
+    z-index: 1;
+  }
+  .envelope-wrapper.is-open .wax-seal-btn {
+    opacity: 0;
+    pointer-events: none;
+    transform: translate(-50%, -50%) scale(0.6);
+  }
+  .envelope-wrapper.is-open .envelope-front-label {
+    opacity: 0;
+  }
+  .envelope-wrapper.is-open .letter {
+    transform: translateY(-80px);
+    box-shadow: 0 22px 60px rgba(0, 0, 0, 0.55);
+    z-index: 6;
+  }
+  .envelope-wrapper.is-open .explore-btn {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+    transition: opacity 0.6s ease 0.5s, transform 0.6s cubic-bezier(0.16, 1, 0.3, 1) 0.5s;
+  }
+
+  @media (max-width: 640px) {
+    .envelope-wrapper.is-open .letter {
+      transform: translateY(-68px);
+      padding: 18px 14px;
+    }
+    .letter-title {
+      font-size: 19px;
+      margin-bottom: 6px;
+    }
+    .letter-body {
+      font-size: 11px;
+      line-height: 1.5;
+      margin-bottom: 8px;
+    }
+    .letter-signature {
+      font-size: 15px;
+      margin-bottom: 8px;
+    }
+    .explore-btn {
+      padding: 8px 18px;
+      font-size: 11px;
+    }
+    .wax-seal-btn {
+      width: 64px;
+      height: 64px;
+    }
+    .seal-inner {
+      width: 50px;
+      height: 50px;
+    }
+    .seal-orchid {
+      font-size: 17px;
+    }
+    .seal-text {
+      font-size: 7.5px;
+    }
+  }
+
+  /* ---------------- Mini Spotify-style Music Player ---------------- */
+  .player {
+    position: fixed;
+    left: 50%;
+    bottom: 24px;
+    transform: translateX(-50%) translateY(140%);
+    z-index: 25;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    width: min(360px, calc(100vw - 32px));
+    padding: 12px 14px;
+    background: rgba(37, 5, 14, 0.88);
+    backdrop-filter: blur(20px) saturate(160%);
+    -webkit-backdrop-filter: blur(20px) saturate(160%);
+    border: 1px solid rgba(212, 175, 55, 0.25);
+    border-radius: 20px;
+    box-shadow: 0 12px 40px rgba(0,0,0,0.65), 0 0 15px rgba(212, 175, 55, 0.15);
+    transition: transform 0.6s cubic-bezier(.16, 1, .3, 1), opacity 0.6s ease;
+    opacity: 0;
+  }
+  .player.is-visible {
+    transform: translateX(-50%) translateY(0);
+    opacity: 1;
+  }
+  .player-art {
+    position: relative;
+    flex-shrink: 0;
+    width: 48px;
+    height: 48px;
+    border-radius: 10px;
+    overflow: hidden;
+    background: #1a0309;
+    border: 1px solid rgba(212, 175, 55, 0.25);
+  }
+  .player-art img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0;
+    transition: opacity 1s ease;
+  }
+  .player-art img.is-active {
+    opacity: 1;
+  }
+  .player-info {
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+  }
+  .player-title {
+    font-size: 12.5px;
+    font-weight: 700;
+    color: var(--champagne);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .player-artist {
+    font-size: 10px;
+    color: var(--blush-border);
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .player-progress {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 3px;
+  }
+  .player-time {
+    font-size: 9px;
+    color: #e5a7b5;
+    font-variant-numeric: tabular-nums;
+    flex-shrink: 0;
+    width: 26px;
+  }
+  .player-time.dur { text-align: right; }
+  .player-seek {
+    flex: 1;
+    appearance: none;
+    -webkit-appearance: none;
+    height: 3px;
+    border-radius: 2px;
+    background: linear-gradient(to right, var(--champagne-gold) var(--progress, 0%), rgba(255,255,255,0.18) var(--progress, 0%));
+    outline: none;
+    cursor: pointer;
+  }
+  .player-seek::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: var(--champagne-gold);
+    opacity: 0;
+    transition: opacity 0.15s ease;
+  }
+  .player-seek:hover::-webkit-slider-thumb,
+  .player-seek:active::-webkit-slider-thumb { opacity: 1; }
+  .player-seek::-moz-range-thumb {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: var(--champagne-gold);
+    border: none;
+    opacity: 0;
+    transition: opacity 0.15s ease;
+  }
+  .player-seek:hover::-moz-range-thumb,
+  .player-seek:active::-moz-range-thumb { opacity: 1; }
+  .player-btn {
+    flex-shrink: 0;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: var(--champagne-gold);
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.35);
+    transition: transform 0.15s ease, background 0.15s ease;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .player-btn:hover { transform: scale(1.08); background: #f0c74d; }
+  .player-btn svg { width: 15px; height: 15px; fill: #380711; }
+  .player-btn #pauseIcon { display: none; }
+  .player.is-playing .player-btn #playIcon { display: none; }
+  .player.is-playing .player-btn #pauseIcon { display: block; }
+
+  @media (max-width: 640px) {
+    .player {
+      bottom: max(16px, env(safe-area-inset-bottom, 16px));
+      width: calc(100vw - 28px);
+      max-width: 350px;
+      padding: 10px 12px;
+    }
+  }
+
+  @keyframes fadeInDown {
+    from { opacity: 0; transform: translateY(-12px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+</style>
+</head>
+<body>
+
+  <!-- Edge-to-Edge Full-Screen Hero Background: Divya (Photo 10) -->
+  <div class="bg-hero-stage" id="bgPhotoStage">
+    <img id="bgHeroPhoto" class="bg-hero-photo" src="/ref/girl10.jpg" alt="Divya">
+    <!-- Subtle Sheer Burgundy Overlay & Soft Edge Vignette -->
+    <div class="bg-cinematic-overlay"></div>
+  </div>
+  <div class="petals-layer" id="petalsLayer"></div>
+
+  <!-- Background Music Audio (Never Autoplays) -->
+  <audio id="bgMusic" loop playsinline preload="auto">
+    <source src="/sounds/pipi-song.mp3" type="audio/mpeg">
+  </audio>
+
+  <!-- Main Envelope Stage -->
+  <div class="envelope-stage">
+    <div class="stage-badge">
+      <span class="orchid-icon">🌸</span>
+      <span>19th Birthday Celebration · Divya</span>
+    </div>
+
+    
+    <!-- 3D Envelope Container -->
+    <div class="envelope-wrapper" id="envelopeWrapper">
+      <div class="envelope-card" id="envelopeCard">
+        <!-- Envelope Interior -->
+        <div class="envelope-interior"></div>
+
+        <!-- Hidden Letter Card (Pops up when opened) -->
+        <div class="letter" id="envelopeLetter">
+          <!-- Decorative Orchid Vector Corners -->
+          <svg class="letter-corner-decor tl" viewBox="0 0 50 50" fill="none" stroke="#7a1b30" stroke-width="1.3">
+            <path d="M4 46 C4 20, 20 4, 46 4" stroke-linecap="round"/>
+            <circle cx="16" cy="16" r="4.5" fill="#f8bbd0"/>
+            <path d="M12 16 C8 12, 8 20, 12 16 Z" fill="#7a1b30"/>
+            <circle cx="28" cy="10" r="2.5" fill="#d4af37"/>
+          </svg>
+          <svg class="letter-corner-decor tr" viewBox="0 0 50 50" fill="none" stroke="#7a1b30" stroke-width="1.3">
+            <path d="M4 46 C4 20, 20 4, 46 4" stroke-linecap="round"/>
+            <circle cx="16" cy="16" r="4.5" fill="#f8bbd0"/>
+            <path d="M12 16 C8 12, 8 20, 12 16 Z" fill="#7a1b30"/>
+            <circle cx="28" cy="10" r="2.5" fill="#d4af37"/>
+          </svg>
+          <svg class="letter-corner-decor bl" viewBox="0 0 50 50" fill="none" stroke="#7a1b30" stroke-width="1.3">
+            <path d="M4 46 C4 20, 20 4, 46 4" stroke-linecap="round"/>
+            <circle cx="16" cy="16" r="4.5" fill="#f8bbd0"/>
+            <path d="M12 16 C8 12, 8 20, 12 16 Z" fill="#7a1b30"/>
+            <circle cx="28" cy="10" r="2.5" fill="#d4af37"/>
+          </svg>
+          <svg class="letter-corner-decor br" viewBox="0 0 50 50" fill="none" stroke="#7a1b30" stroke-width="1.3">
+            <path d="M4 46 C4 20, 20 4, 46 4" stroke-linecap="round"/>
+            <circle cx="16" cy="16" r="4.5" fill="#f8bbd0"/>
+            <path d="M12 16 C8 12, 8 20, 12 16 Z" fill="#7a1b30"/>
+            <circle cx="28" cy="10" r="2.5" fill="#d4af37"/>
+          </svg>
+
+          <p class="letter-tag">A Special Note For You</p>
+          <h1 class="letter-title">Happy 19th Birthday, <span class="name">Divya!</span> 🌸</h1>
+          <p class="letter-body">
+            Welcome to your private birthday world. Every memory, every melody, and every little surprise on this page was crafted with all my love, just for you. Today is all about celebrating the wonderful, radiant, and truly special person you are.
+          </p>
+          <p class="letter-signature">With all my love & warmest wishes ✨</p>
+
+          <button type="button" class="explore-btn" id="exploreBtn" onclick="scrollNext()" aria-label="Explore Your Surprises">
+            <span>Explore Your Surprises</span>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="6 9 12 15 18 9"></polyline>
+            </svg>
+          </button>
+        </div>
+
+        <!-- Envelope Front Folds (Lower Pocket) -->
+        <div class="envelope-pocket">
+          <svg class="envelope-pocket-svg" viewBox="0 0 440 290" preserveAspectRatio="none">
+            <!-- Left Fold -->
+            <polygon points="0,0 0,290 220,155" fill="#420b17" opacity="0.95"/>
+            <!-- Right Fold -->
+            <polygon points="440,0 440,290 220,155" fill="#460c19" opacity="0.95"/>
+            <!-- Bottom Fold -->
+            <polygon points="0,290 440,290 220,140" fill="#520e1e"/>
+            <!-- Delicate Gold Trim Line -->
+            <polyline points="0,290 220,140 440,290" fill="none" stroke="#d4af37" stroke-width="1.2" opacity="0.6"/>
+          </svg>
+        </div>
+
+        <!-- Exterior Front Calligraphy -->
+        <div class="envelope-front-label" id="envelopeFrontLabel">
+          <p class="envelope-to">For Divya <span class="orchid-tag">🌸</span></p>
+        </div>
+
+        <!-- Top Triangular Flap -->
+        <div class="envelope-flap" id="envelopeFlap">
+          <svg class="envelope-flap-svg" viewBox="0 0 440 152" preserveAspectRatio="none">
+            <polygon points="0,0 440,0 220,150" fill="#5c1021"/>
+            <polyline points="0,0 220,150 440,0" fill="none" stroke="#d4af37" stroke-width="1.5" opacity="0.8"/>
+          </svg>
+        </div>
+
+        <!-- Real Button for Opening Envelope (Accessible & Clickable) -->
+        <button type="button" class="wax-seal-btn" id="openEnvelopeBtn" aria-label="Open your surprise for Divya">
+          <span class="seal-pulse"></span>
+          <div class="seal-inner">
+            <span class="seal-orchid">🌸</span>
+            <span class="seal-text">Open</span>
+          </div>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Spotify-Style Mini Player -->
+  <div class="player" id="musicPlayer">
+    <div class="player-art">
+      <img id="artA" class="is-active" src="/ref/girl1.jpg" alt="Divya">
+      <img id="artB" src="/ref/girl2.jpg" alt="Divya">
+    </div>
+    <div class="player-info">
+      <div class="player-title">Divya's Song</div>
+      <div class="player-artist">Birthday Melody · For You</div>
+      <div class="player-progress">
+        <span class="player-time" id="curTime">0:00</span>
+        <input type="range" id="seek" class="player-seek" min="0" max="100" value="0" step="0.1" aria-label="Seek track position">
+        <span class="player-time dur" id="durTime">0:00</span>
+      </div>
+    </div>
+    <button type="button" class="player-btn" id="playPauseBtn" aria-label="Play or pause birthday song">
+      <svg id="playIcon" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+      <svg id="pauseIcon" viewBox="0 0 24 24"><path d="M6 5h4v14H6zM14 5h4v14h-4z"/></svg>
+    </button>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script>
+    // ---------------- Envelope Open & Music Trigger ----------------
+    const openEnvelopeBtn = document.getElementById('openEnvelopeBtn');
+    const envelopeWrapper = document.getElementById('envelopeWrapper');
+    const bgMusic = document.getElementById('bgMusic');
+    const musicPlayer = document.getElementById('musicPlayer');
+    const bgHeroPhoto = document.getElementById('bgHeroPhoto');
+    const petalsLayer = document.getElementById('petalsLayer');
+    let isEnvelopeOpened = false;
+
+    function spawnPetalCelebration() {
+      const colors = [
+        'radial-gradient(ellipse at 30% 30%, #fff0f3 0%, #f8bbd0 60%, rgba(122, 27, 48, 0.4) 100%)',
+        'radial-gradient(ellipse at 30% 30%, #fff9e6 0%, #d4af37 70%, rgba(74, 14, 27, 0.4) 100%)',
+        'radial-gradient(ellipse at 30% 30%, #fce4ec 0%, #f48fb1 60%, rgba(100, 20, 40, 0.5) 100%)'
+      ];
+      for (let i = 0; i < 28; i++) {
+        const petal = document.createElement('div');
+        petal.className = 'orchid-petal';
+        petal.style.background = colors[i % colors.length];
+        const size = 12 + Math.random() * 14;
+        petal.style.width = size + 'px';
+        petal.style.height = (size * 1.3) + 'px';
+        petal.style.left = (window.innerWidth * 0.5 + (Math.random() - 0.5) * 320) + 'px';
+        petal.style.top = (window.innerHeight * 0.5 + (Math.random() - 0.5) * 160) + 'px';
+        petalsLayer.appendChild(petal);
+
+        const angle = Math.random() * Math.PI * 2;
+        const dist = 90 + Math.random() * 260;
+        const destX = Math.cos(angle) * dist;
+        const destY = Math.sin(angle) * dist - 80;
+
+        gsap.fromTo(petal,
+          { opacity: 0.9, scale: 0.4, rotation: Math.random() * 180 },
+          {
+            x: destX,
+            y: destY,
+            rotation: (Math.random() - 0.5) * 540,
+            opacity: 0,
+            scale: 1 + Math.random() * 0.4,
+            duration: 2.2 + Math.random() * 1.2,
+            ease: 'power2.out',
+            onComplete: () => petal.remove()
+          }
+        );
+      }
+    }
+
+    function handleOpenEnvelope() {
+      if (isEnvelopeOpened) return;
+      isEnvelopeOpened = true;
+
+      // 1. Start audio immediately from direct user click
+      if (bgMusic) {
+        bgMusic.play().then(() => {
+          musicPlayer.classList.add('is-playing');
+        }).catch((err) => {
+          console.log("Audio playback note:", err);
+        });
+      }
+
+      // 2. Animate envelope open
+      envelopeWrapper.classList.add('is-open');
+
+      // 3. Subtly accentuate portrait & pop celebratory petals
+      if (bgHeroPhoto) {
+        gsap.to(bgHeroPhoto, { scale: 1.03, duration: 2.8, ease: 'power2.out' });
+      }
+      spawnPetalCelebration();
+
+      // 4. Slide up the music player controls smoothly
+      setTimeout(() => {
+        musicPlayer.classList.add('is-visible');
+      }, 700);
+
+      // 5. Notify parent window that opening surprise is unlocked
+      try {
+        window.parent.postMessage({ type: 'BIRTHDAY_UNLOCKED' }, '*');
+      } catch (e) {}
+    }
+
+    openEnvelopeBtn.addEventListener('click', handleOpenEnvelope);
+    openEnvelopeBtn.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        handleOpenEnvelope();
+      }
+    });
+
+    // ---------------- Navigation to Section 2 ----------------
+    window.scrollNext = function() {
+      try {
+        window.parent.postMessage({ type: 'SCROLL_TO_SECTION_2' }, '*');
+      } catch (e) {}
+    };
+
+    // Mobile touch swipe-up support
+    let touchStartY = 0;
+    let touchStartTime = 0;
+    window.addEventListener('touchstart', (e) => {
+      if (e.touches && e.touches.length === 1) {
+        touchStartY = e.touches[0].clientY;
+        touchStartTime = Date.now();
+      }
+    }, { passive: true });
+
+    window.addEventListener('touchend', (e) => {
+      if (e.changedTouches && e.changedTouches.length === 1) {
+        const dy = e.changedTouches[0].clientY - touchStartY;
+        const dt = Date.now() - touchStartTime;
+        if (dy < -45 && dt < 700) {
+          window.scrollNext();
+        }
+      }
+    }, { passive: true });
+
+    // ---------------- Spotify-style Mini Player Controls ----------------
+    const playPauseBtn = document.getElementById('playPauseBtn');
+    const seek = document.getElementById('seek');
+    const curTimeEl = document.getElementById('curTime');
+    const durTimeEl = document.getElementById('durTime');
+
+    function formatTime(sec) {
+      if (!isFinite(sec) || isNaN(sec)) return '0:00';
+      const m = Math.floor(sec / 60);
+      const s = Math.floor(sec % 60);
+      return `${m}:${String(s).padStart(2, '0')}`;
+    }
+
+    let seeking = false;
+
+    playPauseBtn.addEventListener('click', () => {
+      if (bgMusic.paused) {
+        bgMusic.play().then(() => {
+          musicPlayer.classList.add('is-playing');
+        }).catch(() => {});
+      } else {
+        bgMusic.pause();
+        musicPlayer.classList.remove('is-playing');
+      }
+    });
+
+    bgMusic.addEventListener('play', () => musicPlayer.classList.add('is-playing'));
+    bgMusic.addEventListener('pause', () => musicPlayer.classList.remove('is-playing'));
+
+    bgMusic.addEventListener('loadedmetadata', () => {
+      durTimeEl.textContent = formatTime(bgMusic.duration);
+    });
+
+    bgMusic.addEventListener('timeupdate', () => {
+      if (seeking) return;
+      curTimeEl.textContent = formatTime(bgMusic.currentTime);
+      const pct = bgMusic.duration ? (bgMusic.currentTime / bgMusic.duration) * 100 : 0;
+      seek.value = pct;
+      seek.style.setProperty('--progress', pct + '%');
+    });
+
+    seek.addEventListener('input', () => {
+      seeking = true;
+      seek.style.setProperty('--progress', seek.value + '%');
+      curTimeEl.textContent = formatTime((seek.value / 100) * (bgMusic.duration || 0));
+    });
+
+    seek.addEventListener('change', () => {
+      if (bgMusic.duration) {
+        bgMusic.currentTime = (seek.value / 100) * bgMusic.duration;
+      }
+      seeking = false;
+    });
+
+    // ---------------- Album Art Crossfade ----------------
+    const GIRL_COUNT = 11;
+    const girlSrc = (n) => `/ref/girl${n}.jpg`;
+    const artA = document.getElementById('artA');
+    const artB = document.getElementById('artB');
+    let girlIndex = 1;
+    let showingA = true;
+
+    setInterval(() => {
+      girlIndex = (girlIndex % GIRL_COUNT) + 1;
+      const nextSrc = girlSrc(girlIndex);
+      const incoming = showingA ? artB : artA;
+      const outgoing = showingA ? artA : artB;
+      if (incoming && outgoing) {
+        incoming.src = nextSrc;
+        incoming.classList.add('is-active');
+        outgoing.classList.remove('is-active');
+        showingA = !showingA;
+      }
+    }, 3400);
+  </script>
+</body>
+</html>
