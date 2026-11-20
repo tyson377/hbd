@@ -895,8 +895,14 @@
     // ---------------- Navigation to Section 2 ----------------
     window.scrollNext = function() {
       try {
-        window.parent.postMessage({ type: 'SCROLL_TO_SECTION_2' }, '*');
-      } catch (e) {}
+        if (window.parent && window.parent !== window) {
+          window.parent.postMessage({ type: 'SCROLL_TO_SECTION_2' }, '*');
+        } else {
+          window.location.href = '/#section-2';
+        }
+      } catch (e) {
+        window.location.href = '/#section-2';
+      }
     };
 
     // Mobile touch swipe-up support
